@@ -102,11 +102,23 @@ class WebBoilerGenericSensor(SensorEntity):
         return None
 
     _YES_NO_PARAMS = {
-        "B_fireS", "B_doz", "B_start", "B_specG", "B_dop",
-        "B_zahPa", "B_Valve", "B_P2", "B_P3", "B_P4",
-        "B_Paku", "B_Pk1_k2", "B_VAC_STS", "B_VAC_TUR", "B_cm2k",
-        "B_PTV/GRI", "B_PTV/GRI_SEL",
+        # Binary active/demand states — boiler-specific
+        "B_fireS", "B_zahPa", "B_cm2k",
+        "B_puz",          # pellet transporter active
+        "B_PTV/GRI",      # DHW/heater active state
     }
+
+    # ON/OFF states — consistent with pump/fan binary sensors
+    _ON_OFF_PARAMS = {
+        "B_P2", "B_P3", "B_P4",
+        "B_Paku", "B_Pk1_k2",
+        "B_VAC_STS", "B_VAC_TUR",
+        "B_dop", "B_doz", "B_specG", "B_start",
+        "B_PTV/GRI_SEL",
+    }
+
+    # Valve states
+    _VALVE_PARAMS = {"B_Valve"}
 
     _TANK_LEVEL_STATES = {0: "Empty", 1: "Reserve", 2: "Full"}
 
@@ -118,6 +130,16 @@ class WebBoilerGenericSensor(SensorEntity):
         if self._param_name in WebBoilerGenericSensor._YES_NO_PARAMS:
             try:
                 return "Yes" if int(str(value)) != 0 else "No"
+            except (ValueError, TypeError):
+                pass
+        if self._param_name in WebBoilerGenericSensor._ON_OFF_PARAMS:
+            try:
+                return "ON" if int(str(value)) != 0 else "OFF"
+            except (ValueError, TypeError):
+                pass
+        if self._param_name in WebBoilerGenericSensor._VALVE_PARAMS:
+            try:
+                return "Open" if int(str(value)) != 0 else "Closed"
             except (ValueError, TypeError):
                 pass
         if self._param_name == "B_razina":

@@ -15,13 +15,13 @@ PELTEC_SENSOR_TEMPERATURES = {
 
 PELTEC_SENSOR_COUNTERS = {
     "CNT_0":  [UnitOfTime.MINUTES, "mdi:timer",   None, "Burner Work"],
-    "CNT_1":  ["",                 "mdi:counter", None, "Number of Burner Start"],
+    "CNT_1":  [None,               "mdi:counter", None, "Number of Burner Starts"],
     "CNT_2":  [UnitOfTime.MINUTES, "mdi:timer",   None, "Feeder Screw Work"],
     "CNT_3":  [UnitOfTime.MINUTES, "mdi:timer",   None, "Flame Duration"],
     "CNT_4":  [UnitOfTime.MINUTES, "mdi:timer",   None, "Fan Working Time"],
     "CNT_5":  [UnitOfTime.MINUTES, "mdi:timer",   None, "Electric Heater Working Time"],
     "CNT_6":  [UnitOfTime.MINUTES, "mdi:timer",   None, "Vacuum Turbine Working Time"],
-    "CNT_7":  ["",                 "mdi:counter", None, "Vacuum Turbine Cycles Number"],
+    "CNT_7":  [None,               "mdi:counter", None, "Vacuum Turbine Cycles Number"],
     "CNT_8":  [UnitOfTime.MINUTES, "mdi:timer",   None, "Time on D6"],
     "CNT_9":  [UnitOfTime.MINUTES, "mdi:timer",   None, "Time on D5"],
     "CNT_10": [UnitOfTime.MINUTES, "mdi:timer",   None, "Time on D4"],

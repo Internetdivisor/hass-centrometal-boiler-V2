@@ -9,9 +9,7 @@ To visualize boiler display as card use https://github.com/9a4gl/lovelace-centro
 
 ## About
 
-This is a fork of the original [hass-centrometal-boiler](https://github.com/9a4gl/hass-centrometal-boiler) by Tihomir Heidelberg, maintained by [Internetdivisor](https://github.com/Internetdivisor) with full PelTec II Lambda support and critical bug fixes.
-
-This component connects to the Centrometal web boiler system to provide real-time sensor data and control in Home Assistant. No official API documentation exists — this is based on analysis of Centrometal's web application.
+This is a fork of [hass-centrometal-boiler](https://github.com/9a4gl/hass-centrometal-boiler) by Tihomir Heidelberg, maintained by [Internetdivisor](https://github.com/Internetdivisor) with full PelTec II Lambda support and critical bug fixes.
 
 ## Supported devices
 
@@ -23,24 +21,11 @@ This component connects to the Centrometal web boiler system to provide real-tim
 - EKO-CK P + Cm Pelet-set
 - Compact variants
 
-## What's fixed in this fork
+## Critical fix for all users
 
-- **Critical**: Websocket push updates now correctly reach all sensors and switches. The original code had an `if not self.enabled` guard in all callback methods that silently blocked every real-time update — sensors and switches froze at startup values and never updated. This fixes issue #21 (circuit switches always showing OFF state).
-- Full **PelTec II Lambda** (`peltec2`) device type support with correct operation state translation (OFF / S0-S7 / D0-D6 / PF / C0).
-- `B_Tptv1` and `B_Tkm1` are now correctly named "DHW Flow Temperature" and "DHW Boiler Temperature" — previously both were called "DHW Temperature" causing one to be silently dropped.
-- Binary sensors (`B_Ppwm`, `B_P1`, `B_gri`, `B_fan01`, `K1B_onOff`, `K1B_P`) now show ON/OFF instead of raw 0/1.
-- Boolean sensors (`B_fireS`, `B_doz`, `B_start`, and others) show Yes/No instead of 0/1.
-- Tank level (`B_razina`) shows Empty / Reserve / Full.
-- Supply type (`B_SUP_TYPE`) shows None / Pellet Screw / Vacuum.
-- Added `B_fanB`, `B_WifiVER`, heating circuit Valve Closing/Opening sensors.
-- Temperature units and device classes fixed for `B_ODRTMP` and `K1B_korN`.
-- Duplicate sensor entries removed between generic and heating circuit maps.
-- Unknown parameters from future firmware versions are auto-exposed, hidden by default.
-- Bundled `py-centrometal-web-boiler==0.0.60` with SSL fixes — no external PyPI dependency.
-- Removed all deprecated HA APIs (`device_state_attributes` → `extra_state_attributes`).
-- Correct `SensorStateClass` for history graphs and energy dashboard.
+All sensors and switches were silently freezing at startup values and never updating from websocket pushes. This affected every device type. Fixed. Also fixes issue #21 (circuit switches always showing OFF).
 
-See [CHANGELOG.md](CHANGELOG.md) for the full list of changes.
+See [CHANGELOG.md](CHANGELOG.md) for full details.
 
 ## Installation
 
